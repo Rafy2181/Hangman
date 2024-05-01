@@ -1,8 +1,19 @@
 
 #lesson 28/03/2024
 
-print("Welcome to the game Hangman")
-print("""
+print("***Welcome to the game Hangman***")
+print()
+AWord=input("Enter a word between 5-10 letters : ")
+if(len(AWord)<5 or len(AWord)>10):
+    AWord=input("Enter a word between 5-10 letters : ")
+
+def space(spRow):            #spaces function for covering the above
+    while(spRow>0):
+        print(" ")
+        spRow-=1
+
+space(spRow=8)         #covering function
+print("""                          
     _    _
    | |  | |
    | |__| | __ _ _ __   __ _ _ __ ___   __ _ _ __
@@ -12,8 +23,7 @@ print("""
                         __/ |
                        |___/
 """)
-   
-
+space(spRow=8)         #covering function
 
 def Hangman(c):
     if c==0:
@@ -95,19 +105,17 @@ x-------x
 
 
 #### main ####   
-AWord=input("Enter a word between 5-10 letters : ")
-if(len(AWord)<5 or len(AWord)>10):
-    AWord=input("Enter a word between 5-10 letters : ")
 ezer='_'*(len(AWord))
-print()
 print(ezer, (len(AWord)),"letters")
 print()
 c=0                    #count of mistaks
 t=len(AWord)           #count of correct answers
-while(c<7 or t>0):
-    aletter=input("enter a letter : ")
+while(c<7 and t>0):
+    aletter=input("""Enter a letter :
+              
+""")
     while(len(aletter)<1 or len(aletter)>1):
-        aletter=input("enter a single letter : ")
+        aletter=input("Enter a single letter : ")
     theWord=""
     n=0
     for i in range(len(AWord)):
@@ -117,10 +125,15 @@ while(c<7 or t>0):
            theWord=theWord+(chr(95))
         elif(ord(aletter)==ord(AWord[i])):
            theWord=theWord+chr(ord(aletter))
-           n+=1                         #no mistaks adding
+           n+=1                         #not a mistak adding
            t-=1                         #count of correct answers
     ezer=theWord
-    if(n==0):
+    if(n==0):                           #mistaks adding
         c+=1                            #count of mistaks
-    print(theWord)
+    print()
+    print("***"+theWord+"***")
+    print()
     print(Hangman(c))
+    if(t==0):
+        print("***you won***")
+    space(spRow=10)
